@@ -1,0 +1,43 @@
+Zallus Laser Power Command Structure: 				Date: 	8/4/2012
+---------------------------------------------------------------------------------------
+
+Description: The Zallus laser power meter uses a USB interface. This interface is acheived by a VCP driver which is a USB to UART passthrough. Using this USB implementation, the implementation is significantly simplified. Below are the list of the UART commands that can be sent through this passthrough in order to manipulate the Zallus Laser Power Meter
+
+---------------------------------------------------------------------------------------
+Overview: 
+
+UART Settings: 9600, no flow control, 1 stop bit
+Commands consist of a single byte sent to MCU. Computer is host and will poll the MCU for data. 
+
+
+---------------------------------------------------------------------------------------
+
+Command: Reset
+
+ASCII command '1'
+
+Description: Resets MCU
+
+---------------------------------------------------------------------------------------
+
+Command: Send Data
+
+ASCII command '2'
+
+Description: MCU will send 4 bytes of data. This data is the present output of the meter in mW. Each byte is a ASCII representation of the power in mW. Ascii to hex/dec conversion will be necessary. 
+
+---------------------------------------------------------------------------------------
+
+Command: send 'Connected'
+
+ASCII command '3'
+
+Description: A calibration command in order to ensure MCU is talking properly with PC. Send this command in order to recieve 'Connected' back from the MCU in ASCII format. 
+
+---------------------------------------------------------------------------------------
+
+Command: Reset
+
+ASCII command '4'
+
+Description: Sets the MCU in a state where it is acitvley computing data conversions from MCU. 
